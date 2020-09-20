@@ -42,6 +42,18 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    //Retrofit 2
+    def retrofit_version="2.7.2"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
+
+    // Rxjava2
+    implementation "io.reactivex.rxjava2:rxjava:2.1.10"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+
     testImplementation 'junit:junit:4.12'
     testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
     kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
