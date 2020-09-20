@@ -1,32 +1,42 @@
 package com.hanitacm.popularmovies.ui.main
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.navigation.navGraphViewModels
+import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.main_fragment.*
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : Fragment(R.layout.main_fragment) {
 
-  companion object {
-    fun newInstance() = MainFragment()
-  }
 
-  private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) {
+        defaultViewModelProviderFactory
+    }
 
-  override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                            savedInstanceState: Bundle?): View {
-    return inflater.inflate(R.layout.main_fragment, container, false)
-  }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-    // TODO: Use the ViewModel
-  }
+        subscribeObservers()
 
+        viewModel.getPopularMovies()
+    }
+
+    private fun subscribeObservers() {
+        viewModel.movies.observe(
+            viewLifecycleOwner,
+            Observer { result -> appendBlogTitles(result) })
+    }
+
+    private fun appendBlogTitles(movies: List<MovieDomainModel>) {
+        val sb = StringBuilder()
+        for (movie in movies) {
+            sb.append(movie.title + "\n")
+        }
+        message.text = sb.toString()
+    }
 }
