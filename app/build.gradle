@@ -42,6 +42,11 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
 
+    //Navigation Controller
+    def nav_version = "2.3.0"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
     //Retrofit 2
     def retrofit_version="2.7.2"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -52,6 +57,9 @@ dependencies {
     // Rxjava2
     implementation "io.reactivex.rxjava2:rxjava:2.1.10"
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+
+
+
 
 
     testImplementation 'junit:junit:4.12'
