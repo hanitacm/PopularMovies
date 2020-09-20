@@ -1,4 +1,4 @@
-package com.hanitacm.data
+package com.hanitacm.data.datasource.api.data
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,14 +6,14 @@ data class MoviesResponse(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")
-    val results: List<Movie>,
+    val results: List<MovieData>,
     @SerializedName("total_pages")
     val totalPages: Int,
     @SerializedName("total_results")
     val totalResults: Int
 )
 
-data class Movie(
+data class MovieData(
     @SerializedName("adult")
     val adult: Boolean,
     @SerializedName("backdrop_path")
@@ -39,7 +39,7 @@ data class Movie(
     @SerializedName("video")
     val video: Boolean,
     @SerializedName("vote_average")
-    val voteAverage: Int,
+    val voteAverage: Double,
     @SerializedName("vote_count")
     val voteCount: Int
 )
