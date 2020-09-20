@@ -25,7 +25,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //Retrofit 2
-    def retrofit_version = "2.3.0"
+    def retrofit_version = "2.7.2"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
@@ -33,7 +33,18 @@ dependencies {
     def rxjava_version = "2.1.10"
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
-    testImplementation 'junit:junit:4.12'
+
+    //Test
+    //JUnit
+    def junit_version = "4.13"
+    testImplementation "junit:junit:$junit_version"
+
+    //Mockito
+    def mockito_version = "3.3.3"
+    def mockito_kotlin_version = "2.2.0"
+    testImplementation "org.mockito:mockito-inline:$mockito_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
