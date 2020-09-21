@@ -65,10 +65,14 @@ dependencies {
     implementation baseDependencies.rxjava
     implementation baseDependencies.rxandroid
 
-    implementation uiDependencies.support_appcompat
+    implementation uiDependencies.cardview
+    implementation uiDependencies.coil
     implementation uiDependencies.constraint_layout
     implementation uiDependencies.navigation_ui
     implementation uiDependencies.navigation_fragment
+    implementation uiDependencies.recyclerview
+    implementation uiDependencies.support_appcompat
+
 
     testImplementation testDependencies.junit
 }

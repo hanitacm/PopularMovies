@@ -1,13 +1,15 @@
 package com.hanitacm.popularmovies.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
+import com.hanitacm.popularmovies.ui.main.adapters.MoviesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.main_fragment.*
 
@@ -18,13 +20,24 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     private val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
+    private lateinit var viewManager: RecyclerView.LayoutManager
+    private lateinit var viewAdapter: MoviesAdapter
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerView()
         subscribeObservers()
 
         viewModel.getPopularMovies()
+    }
+
+    private fun setupRecyclerView() {
+        viewManager = GridLayoutManager(requireContext(), 2)
+        viewAdapter = MoviesAdapter()
+        rv_movies.adapter = viewAdapter
+        rv_movies.layoutManager = viewManager
     }
 
     private fun subscribeObservers() {
@@ -33,25 +46,21 @@ class MainFragment : Fragment(R.layout.main_fragment) {
             Observer {
                 when (it) {
                     is MainViewModelState.Loading -> showProgressBar()
-                    is MainViewModelState.MoviesLoaded -> appendBlogTitles(it.movies)
+                    is MainViewModelState.MoviesLoaded -> loadMovies(it.movies)
                     is MainViewModelState.MoviesLoadFailure -> showError(it.error)
 
                 }
             })
     }
 
+
     private fun showProgressBar() {
-        //progressBar.visibility = View.VISIBLE
-        Log.i("MOVIES","Loading")
+        progressBar.visibility = View.VISIBLE
     }
 
-
-    private fun appendBlogTitles(movies: List<MovieDomainModel>) {
-        val sb = StringBuilder()
-        for (movie in movies) {
-            sb.append(movie.title + "\n")
-        }
-        message.text = sb.toString()
+    private fun loadMovies(movies: List<MovieDomainModel>) {
+        progressBar.visibility = View.GONE
+        viewAdapter.items = movies
     }
 
     private fun showError(error: Exception) {
