@@ -1,13 +1,15 @@
-apply plugin: 'java-library'
 apply plugin: 'kotlin'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    def baseDependencies = rootProject.ext.baseDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+
+    //implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     // Rxjava2
-    def rxjava_version = "2.1.10"
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    //def rxjava_version = "2.1.10"
+    //implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 }
 
 sourceCompatibility = "1.7"

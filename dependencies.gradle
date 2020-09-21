@@ -44,10 +44,10 @@ ext {
 
 
     uiDependencies = [
-            constraint_layout  : "com.android.support.constraint:constraint-layout:${android_constraint_layout_version}",
+            constraint_layout  : "androidx.constraintlayout:constraintlayout:${android_constraint_layout_version}",
             navigation_fragment: "androidx.navigation:navigation-fragment-ktx:${android_nav_version}",
             navigation_ui      : "androidx.navigation:navigation-ui-ktx:${android_nav_version}",
-            support_appcompat  : "com.android.support:appcompat-v7:${android_support_version}"
+            support_appcompat  : "androidx.appcompat:appcompat:${android_support_version}"
 
     ]
 

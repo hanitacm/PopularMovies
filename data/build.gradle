@@ -3,49 +3,64 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 29
+    def globalConfiguration = rootProject.extensions.getByName("ext")
+
+    compileSdkVersion globalConfiguration["androidCompileSdkVersion"]
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion globalConfiguration["androidMinSdkVersion"]
+        targetSdkVersion globalConfiguration["androidTargetSdkVersion"]
     }
 
 
 }
 
-
 dependencies {
+
+    def baseDependencies = rootProject.ext.baseDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+
     implementation project(":domain")
 
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.1.0'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation baseDependencies.retrofit
+    implementation baseDependencies.retrofit_gson
+    implementation baseDependencies.rxjava
+
+    testImplementation testDependencies.junit
+    testImplementation testDependencies.mockito
+    testImplementation testDependencies.mockito_kotlin
+
+
+
+
+
+    //implementation baseDependencies.kotlin_stdlib
+    //implementation 'androidx.core:core-ktx:1.1.0'
+    //implementation 'androidx.appcompat:appcompat:1.2.0'
 
     //Retrofit 2
-    def retrofit_version = "2.7.2"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    //def retrofit_version = "2.7.2"
+    //implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    //implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     // Rxjava2
-    def rxjava_version = "2.1.10"
-    implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    //def rxjava_version = "2.1.10"
+    //implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
 
 
     //Test
     //JUnit
-    def junit_version = "4.13"
-    testImplementation "junit:junit:$junit_version"
+    //def junit_version = "4.13"
+    //testImplementation "junit:junit:$junit_version"
 
     //Mockito
-    def mockito_version = "3.3.3"
-    def mockito_kotlin_version = "2.2.0"
-    testImplementation "org.mockito:mockito-inline:$mockito_version"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    def mockito_version = "3.3.3"
+//    def mockito_kotlin_version = "2.2.0"
+//    testImplementation "org.mockito:mockito-inline:$mockito_version"
+//    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito_kotlin_version"
+//
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
 }
