@@ -1,6 +1,7 @@
 package com.hanitacm.popularmovies.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -27,10 +28,23 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private fun subscribeObservers() {
-        viewModel.movies.observe(
+        viewModel.viewState.observe(
             viewLifecycleOwner,
-            Observer { result -> appendBlogTitles(result) })
+            Observer {
+                when (it) {
+                    is MainViewModelState.Loading -> showProgressBar()
+                    is MainViewModelState.MoviesLoaded -> appendBlogTitles(it.movies)
+                    is MainViewModelState.MoviesLoadFailure -> showError(it.error)
+
+                }
+            })
     }
+
+    private fun showProgressBar() {
+        //progressBar.visibility = View.VISIBLE
+        Log.i("MOVIES","Loading")
+    }
+
 
     private fun appendBlogTitles(movies: List<MovieDomainModel>) {
         val sb = StringBuilder()
@@ -39,4 +53,10 @@ class MainFragment : Fragment(R.layout.main_fragment) {
         }
         message.text = sb.toString()
     }
+
+    private fun showError(error: Exception) {
+
+    }
+
+
 }

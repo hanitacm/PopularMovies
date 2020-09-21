@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.hanitacm.domain.model.MovieDomainModel
+import com.hanitacm.domain.UseCaseResult
 import com.hanitacm.domain.usecase.GetPopularMoviesUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -20,22 +20,36 @@ class MainViewModel @ViewModelInject constructor(
 
     private val subscription = CompositeDisposable()
 
-    private val _movies = MutableLiveData<List<MovieDomainModel>>()
-    val movies: LiveData<List<MovieDomainModel>>
-        get() = _movies
-
+    private val _viewState = MutableLiveData<MainViewModelState>()
+    val viewState: LiveData<MainViewModelState>
+        get() {
+            if (_viewState.value == null) loading()
+            return _viewState
+        }
 
     fun getPopularMovies() {
         subscription.add(
             getPopularMoviesUseCase.getPopularMovies()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe({ result -> _movies.postValue(result) }, { error -> showError(error) })
-        )
+                .subscribe { result ->
+                    when (result) {
+                        is UseCaseResult.Success -> _viewState.postValue(
+                            MainViewModelState.MoviesLoaded(
+                                result.data
+                            )
+                        )
+                        is UseCaseResult.Error<*> -> _viewState.postValue(
+                            MainViewModelState.MoviesLoadFailure(
+                                result.error
+                            )
+                        )
+                    }
+                })
     }
 
-    private fun showError(error: Throwable?) {
-
+    private fun loading() {
+        _viewState.value = MainViewModelState.Loading
     }
 
     override fun onCleared() {
