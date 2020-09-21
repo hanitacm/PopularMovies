@@ -2,8 +2,9 @@ package com.hanitacm.data.model.mappers
 
 import com.hanitacm.data.model.MoviesDataModel
 import com.hanitacm.domain.model.MovieDomainModel
+import javax.inject.Inject
 
-class MoviesDataModelMapper {
+class MoviesDataModelMapper @Inject constructor() {
     fun mapToDomainModel(moviesDataModel: MoviesDataModel): List<MovieDomainModel> {
         return moviesDataModel.results.map {
             MovieDomainModel(

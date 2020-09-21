@@ -71,39 +71,5 @@ dependencies {
     implementation uiDependencies.navigation_fragment
 
     testImplementation testDependencies.junit
-
-
-    //Hilt
-    //implementation "com.google.dagger:hilt-android:$hilt_version"
-    //kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-    //def hilt_viewmodels = "1.0.0-alpha02"
-    //implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_viewmodels"
-    //kapt "androidx.hilt:hilt-compiler:$hilt_viewmodels"
-
-    //Navigation Controller
-    //def nav_version = "2.3.0"
-    //implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    //implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    //Retrofit 2
-//    def retrofit_version = "2.7.2"
-//    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-//    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-//    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
-//    implementation 'com.squareup.okhttp3:logging-interceptor:4.8.1'
-
-    // Rxjava2
-    // implementation "io.reactivex.rxjava2:rxjava:2.1.10"
-    //implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
-
-
-    // testImplementation 'junit:junit:4.12'
-    //testImplementation "com.google.dagger:hilt-android-testing:$hilt_version"
-    //kaptTest "com.google.dagger:hilt-android-compiler:$hilt_version"
-
-
-    //androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 }
 

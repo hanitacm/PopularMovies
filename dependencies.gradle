@@ -13,6 +13,7 @@ ext {
     android_support_version = "1.2.0"
 
     hilt_viewmodels = "1.0.0-alpha02"
+    javax_inject_version = "1"
     okhttp_version = "4.8.1"
     retrofit_version = "2.7.2"
     rxandroid_version = '2.0.2'
@@ -32,6 +33,7 @@ ext {
             hilt_android_compiler      : "com.google.dagger:hilt-android-compiler:${hilt_version}",
             hilt_lifecycle_viewmodel   : "androidx.hilt:hilt-lifecycle-viewmodel:${hilt_viewmodels}",
             hilt_compiler              : "androidx.hilt:hilt-compiler:${hilt_viewmodels}",
+            javax_inject               : "javax.inject:javax.inject:${javax_inject_version}",
             kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
             okhhtp_logging             : "com.squareup.okhttp3:logging-interceptor:${okhttp_version}",
             retrofit                   : "com.squareup.retrofit2:retrofit:${retrofit_version}",

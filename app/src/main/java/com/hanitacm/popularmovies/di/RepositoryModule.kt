@@ -22,10 +22,5 @@ object RepositoryModule {
     ): MoviesRepository =
         MoviesRepositoryImpl(moviesApi, moviesDataModelMapper)
 
-    @Singleton
-    @Provides
-    fun provideMoviesDataModelMapper(): MoviesDataModelMapper = MoviesDataModelMapper()
-
-
 }
 

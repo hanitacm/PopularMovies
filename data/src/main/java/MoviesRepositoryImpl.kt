@@ -3,8 +3,9 @@ import com.hanitacm.data.model.mappers.MoviesDataModelMapper
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.domain.repository.MoviesRepository
 import io.reactivex.Single
+import javax.inject.Inject
 
-class MoviesRepositoryImpl(
+class MoviesRepositoryImpl @Inject constructor(
     private val moviesApi: MoviesApi,
     private val moviesDataModelMapper: MoviesDataModelMapper
 ) : MoviesRepository {
