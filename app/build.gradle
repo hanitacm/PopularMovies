@@ -42,6 +42,7 @@ kapt {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     def baseDependencies = rootProject.ext.baseDependencies
     def uiDependencies = rootProject.ext.uiDependencies
     def testDependencies = rootProject.ext.testDependencies

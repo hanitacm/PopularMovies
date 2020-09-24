@@ -3,11 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/firstFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/firstFragment"
         android:name="com.hanitacm.popularmovies.ui.main.MainFragment"
         tools:layout="@layout/main_fragment" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.hanitacm.popularmovies.DetailFragment"
+        android:label="detail_fragment"
+        tools:layout="@layout/detail_fragment" />
 
 </navigation>
