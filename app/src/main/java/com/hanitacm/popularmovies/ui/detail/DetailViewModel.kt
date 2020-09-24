@@ -1,4 +1,4 @@
-package com.hanitacm.popularmovies
+package com.hanitacm.popularmovies.ui.detail
 
 import androidx.lifecycle.ViewModel
 
