@@ -23,6 +23,7 @@ ext {
     rxjava_version = "2.1.10"
 
     //Test
+    core_testing_version = '2.1.0'
     espresso_version = "3.3.0"
     junit_version = "4.12"
     mockito_version = "3.3.3"
@@ -61,10 +62,12 @@ ext {
     ]
 
     testDependencies = [
+            android_core_testing : "androidx.arch.core:core-testing:${core_testing_version}",
             espresso      : "androidx.test.espresso:espresso-core:${espresso_version}",
             junit         : "junit:junit:${junit_version}",
             mockito       : "org.mockito:mockito-inline:${mockito_version}",
             mockito_kotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_kotlin_version}"
+
 
     ]
 
