@@ -4,11 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
+import com.hanitacm.popularmovies.ui.model.Movie
 import kotlinx.android.synthetic.main.movie_card_item.view.*
 import kotlin.properties.Delegates
 
@@ -29,7 +31,25 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
         holder.bind(mediaItem)
         holder.itemView.setOnClickListener {
             val navigationController = Navigation.findNavController(it)
-            navigationController.navigate(R.id.action_firstFragment_to_detailFragment)
+            val movie = with(mediaItem) {
+                Movie(
+                    id = id,
+                    title = title,
+                    overview,
+                    releaseDate,
+                    posterPath,
+                    backdropPath,
+                    originalLanguage,
+                    originalTitle,
+                    popularity,
+                    voteAverage
+                )
+            }
+
+            navigationController.navigate(
+                R.id.action_firstFragment_to_detailFragment,
+                bundleOf("movie" to movie)
+            )
         }
     }
 
