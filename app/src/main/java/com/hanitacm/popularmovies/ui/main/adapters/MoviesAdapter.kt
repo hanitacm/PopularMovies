@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.hanitacm.domain.model.MovieDomainModel
@@ -26,6 +27,10 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
         val mediaItem = items[position]
 
         holder.bind(mediaItem)
+        holder.itemView.setOnClickListener {
+            val navigationController = Navigation.findNavController(it)
+            navigationController.navigate(R.id.action_firstFragment_to_detailFragment)
+        }
     }
 
     override fun getItemCount(): Int {
