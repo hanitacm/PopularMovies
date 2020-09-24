@@ -1,4 +1,4 @@
-package com.hanitacm.data.model
+package com.hanitacm.data.datasource.api.model
 
 import com.google.gson.annotations.SerializedName
 

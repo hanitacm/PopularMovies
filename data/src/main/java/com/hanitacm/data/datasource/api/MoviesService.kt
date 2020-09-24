@@ -3,7 +3,7 @@ package com.hanitacm.data.datasource.api
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import com.hanitacm.data.model.MoviesDataModel
+import com.hanitacm.data.datasource.api.model.MoviesDataModel
 
 
 interface MoviesService {

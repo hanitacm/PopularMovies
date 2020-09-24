@@ -1,6 +1,6 @@
 package com.hanitacm.data.datasource.api
 
-import com.hanitacm.data.model.MoviesDataModel
+import com.hanitacm.data.datasource.api.model.MoviesDataModel
 import io.reactivex.Single
 import javax.inject.Inject
 

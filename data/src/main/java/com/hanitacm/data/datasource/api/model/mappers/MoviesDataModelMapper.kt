@@ -1,6 +1,6 @@
-package com.hanitacm.data.model.mappers
+package com.hanitacm.data.datasource.api.model.mappers
 
-import com.hanitacm.data.model.MoviesDataModel
+import com.hanitacm.data.datasource.api.model.MoviesDataModel
 import com.hanitacm.domain.model.MovieDomainModel
 import javax.inject.Inject
 
