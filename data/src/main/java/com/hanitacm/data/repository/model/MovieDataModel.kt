@@ -1,4 +1,4 @@
-package com.hanitacm.data.repository
+package com.hanitacm.data.repository.model
 
 data class MovieDataModel(
     val id: Int,

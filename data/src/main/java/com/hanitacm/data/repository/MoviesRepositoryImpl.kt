@@ -2,6 +2,7 @@ package com.hanitacm.data.repository
 
 import com.hanitacm.data.datasource.api.MoviesApi
 import com.hanitacm.data.datasource.cache.MoviesCache
+import com.hanitacm.data.repository.model.mappers.MovieDataModelMapper
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.domain.repository.MoviesRepository
 import io.reactivex.Single

@@ -1,5 +1,6 @@
-package com.hanitacm.data.repository
+package com.hanitacm.data.repository.model.mappers
 
+import com.hanitacm.data.repository.model.MovieDataModel
 import com.hanitacm.domain.model.MovieDomainModel
 import javax.inject.Inject
 

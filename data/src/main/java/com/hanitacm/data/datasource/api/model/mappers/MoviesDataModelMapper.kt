@@ -2,7 +2,7 @@ package com.hanitacm.data.datasource.api.model.mappers
 
 
 import com.hanitacm.data.datasource.api.model.MoviesApiModel
-import com.hanitacm.data.repository.MovieDataModel
+import com.hanitacm.data.repository.model.MovieDataModel
 import javax.inject.Inject
 
 class MoviesDataModelMapper @Inject constructor() {

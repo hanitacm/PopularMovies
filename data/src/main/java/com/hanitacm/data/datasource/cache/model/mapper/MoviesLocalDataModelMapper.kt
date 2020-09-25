@@ -1,7 +1,7 @@
 package com.hanitacm.data.datasource.cache.model.mapper
 
 import com.hanitacm.data.datasource.db.Movie
-import com.hanitacm.data.repository.MovieDataModel
+import com.hanitacm.data.repository.model.MovieDataModel
 import javax.inject.Inject
 
 class MoviesLocalDataModelMapper @Inject constructor() {

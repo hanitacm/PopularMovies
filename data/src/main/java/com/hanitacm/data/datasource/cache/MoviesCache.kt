@@ -2,7 +2,7 @@ package com.hanitacm.data.datasource.cache
 
 import com.hanitacm.data.datasource.cache.model.mapper.MoviesLocalDataModelMapper
 import com.hanitacm.data.datasource.db.MoviesDatabase
-import com.hanitacm.data.repository.MovieDataModel
+import com.hanitacm.data.repository.model.MovieDataModel
 import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject

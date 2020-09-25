@@ -1,9 +1,7 @@
 package com.hanitacm.data.datasource.api
 
 import com.hanitacm.data.datasource.api.model.mappers.MoviesDataModelMapper
-import com.hanitacm.data.repository.MovieDataModel
-import io.reactivex.Flowable
-import io.reactivex.Maybe
+import com.hanitacm.data.repository.model.MovieDataModel
 import io.reactivex.Single
 import javax.inject.Inject
 

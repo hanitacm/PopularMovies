@@ -4,7 +4,7 @@ import android.content.Context
 import com.hanitacm.data.datasource.api.MoviesApi
 import com.hanitacm.data.datasource.cache.MoviesCache
 import com.hanitacm.data.datasource.db.MoviesDatabase
-import com.hanitacm.data.repository.MovieDataModelMapper
+import com.hanitacm.data.repository.model.mappers.MovieDataModelMapper
 import com.hanitacm.data.repository.MoviesRepositoryImpl
 import com.hanitacm.domain.repository.MoviesRepository
 import dagger.Module
