@@ -18,8 +18,9 @@ class MoviesCache @Inject constructor(
         }.toSingle()
     }
 
-    fun insertMovies(movies: List<MovieDataModel>): Single<List<Long>> {
+    fun insertMovies(movies: List<MovieDataModel>) {
         return moviesDatabase.movieDao.insertAll(mapperLocal.mapToLocalDataModel(movies))
+
     }
 
 }

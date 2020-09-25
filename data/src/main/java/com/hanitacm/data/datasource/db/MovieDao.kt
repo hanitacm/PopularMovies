@@ -13,5 +13,5 @@ interface MovieDao {
     fun getAll(): Maybe<List<Movie>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(movies: List<Movie>): Single<List<Long>>
+    fun insertAll(movies: List<Movie>)
 }

@@ -1,8 +1,6 @@
 package com.hanitacm.data
 
 import com.hanitacm.data.datasource.api.MoviesApi
-import com.hanitacm.data.datasource.api.model.MovieData
-import com.hanitacm.data.datasource.api.model.MoviesApiModel
 import com.hanitacm.data.datasource.cache.MoviesCache
 import com.hanitacm.data.repository.MoviesRepositoryImpl
 import com.hanitacm.data.repository.model.MovieDataModel
@@ -44,6 +42,7 @@ class MoviesRepositoryTest {
 
         verify(moviesCache, only()).getAllMovies()
         verify(moviesApi, never()).getAllMovies()
+        verify(moviesCache, never()).insertMovies(moviesDataModel)
 
     }
 
@@ -74,15 +73,13 @@ class MoviesRepositoryTest {
         whenever(moviesCache.getAllMovies()).thenReturn(Single.just(emptyList()))
         whenever(moviesApi.getAllMovies()).thenReturn(Single.just(moviesDataModel))
 
-        val moviesResponse =moviesRepository.getPopularMovies().test()
+        val moviesResponse = moviesRepository.getPopularMovies().test()
 
         verify(moviesDataModelMapper).mapToDomainModel(moviesDataModel)
 
         moviesResponse.assertResult(moviesDomainModel)
 
     }
-
-
 
 
     private val moviesDataModel = listOf(
@@ -114,7 +111,6 @@ class MoviesRepositoryTest {
             id = 694919
         )
     )
-
 
 
 }
