@@ -63,6 +63,8 @@ dependencies {
     implementation baseDependencies.retrofit
     implementation baseDependencies.retrofit_rxJava
     implementation baseDependencies.retrofit_gson
+    implementation baseDependencies.room
+    kapt baseDependencies.room_compiler
     implementation baseDependencies.rxjava
     implementation baseDependencies.rxandroid
 

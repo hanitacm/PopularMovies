@@ -1,6 +1,6 @@
 package com.hanitacm.data
 
-import MoviesRepositoryImpl
+import com.hanitacm.data.repository.MoviesRepositoryImpl
 import com.hanitacm.data.datasource.api.MoviesApi
 import com.hanitacm.data.datasource.api.model.MovieData
 import com.hanitacm.data.datasource.api.model.MoviesDataModel

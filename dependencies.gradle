@@ -43,6 +43,7 @@ ext {
             okhhtp_logging             : "com.squareup.okhttp3:logging-interceptor:${okhttp_version}",
             room                       : "androidx.room:room-runtime:${room_version}",
             room_compiler              : "androidx.room:room-compiler:${room_version}",
+            room_rxjava2               : "androidx.room:room-rxjava2:${room_version}",
             retrofit                   : "com.squareup.retrofit2:retrofit:${retrofit_version}",
             retrofit_rxJava            : "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}",
             retrofit_gson              : "com.squareup.retrofit2:converter-gson:${retrofit_version}",

@@ -2,7 +2,7 @@ package com.hanitacm.data.datasource.api.model
 
 import com.google.gson.annotations.SerializedName
 
-data class MoviesDataModel(
+data class MoviesApiModel(
     @SerializedName("page")
     val page: Int,
     @SerializedName("results")

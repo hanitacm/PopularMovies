@@ -2,6 +2,7 @@ package com.hanitacm.popularmovies.di
 
 import com.hanitacm.data.datasource.api.MoviesApi
 import com.hanitacm.data.datasource.api.MoviesService
+import com.hanitacm.data.datasource.api.model.mappers.MoviesDataModelMapper
 import com.hanitacm.popularmovies.BuildConfig
 import dagger.Module
 import dagger.Provides
@@ -51,5 +52,6 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideMoviesApi(moviesService: MoviesService): MoviesApi = MoviesApi(moviesService)
+    fun provideMoviesApi(moviesService: MoviesService, mapper: MoviesDataModelMapper): MoviesApi =
+        MoviesApi(moviesService, mapper)
 }

@@ -1,14 +1,13 @@
-package com.hanitacm.data.datasource.api.model.mappers
+package com.hanitacm.data.repository
 
-
-import com.hanitacm.data.datasource.api.model.MoviesApiModel
-import com.hanitacm.data.repository.MovieDataModel
+import com.hanitacm.domain.model.MovieDomainModel
 import javax.inject.Inject
 
-class MoviesDataModelMapper @Inject constructor() {
-    fun mapToDataModel(moviesApiModel: MoviesApiModel): List<MovieDataModel> {
-        return moviesApiModel.results.map {
-            MovieDataModel(
+class MovieDataModelMapper @Inject constructor() {
+
+    fun mapToDomainModel(movies: List<MovieDataModel>): List<MovieDomainModel> {
+        return movies.map {
+            MovieDomainModel(
                 id = it.id,
                 title = it.title,
                 overview = it.overview,
@@ -22,4 +21,5 @@ class MoviesDataModelMapper @Inject constructor() {
             )
         }
     }
+
 }
