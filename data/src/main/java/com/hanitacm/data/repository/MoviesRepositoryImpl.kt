@@ -15,11 +15,14 @@ class MoviesRepositoryImpl @Inject constructor(
 ) : MoviesRepository {
 
     override fun getPopularMovies(): Single<List<MovieDomainModel>> {
-        return Single.concat(moviesCache.getAllMovies(), moviesApi.getMovies())
-            .filter { it.isNotEmpty() }
-            .firstOrError()
-            .doOnSuccess { moviesCache.insertMovies(it) }
-            .map { mapper.mapToDomainModel(it) }
+        return moviesCache.getAllMovies()
+            .flatMap { movies ->
+                when {
+                    movies.isEmpty() -> moviesApi.getAllMovies()
+                        .doOnSuccess { moviesCache.insertMovies(it) }
+                    else -> Single.just(movies)
+                }
+            }.map { mapper.mapToDomainModel(it) }
     }
 }
 

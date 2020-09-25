@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import io.reactivex.Completable
-import io.reactivex.Flowable
 import io.reactivex.Maybe
 import io.reactivex.Single
 
@@ -15,5 +13,5 @@ interface MovieDao {
     fun getAll(): Maybe<List<Movie>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(movies: List<Movie>) : Completable
+    fun insertAll(movies: List<Movie>): Single<List<Long>>
 }

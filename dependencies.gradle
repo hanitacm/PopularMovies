@@ -70,7 +70,8 @@ ext {
             espresso            : "androidx.test.espresso:espresso-core:${espresso_version}",
             junit               : "junit:junit:${junit_version}",
             mockito             : "org.mockito:mockito-inline:${mockito_version}",
-            mockito_kotlin      : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_kotlin_version}"
+            mockito_kotlin      : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_kotlin_version}",
+            room_testing        : "androidx.room:room-testing:$room_version"
 
 
     ]

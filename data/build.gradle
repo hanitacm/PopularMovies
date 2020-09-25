@@ -36,5 +36,6 @@ dependencies {
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockito_kotlin
+    testImplementation testDependencies.room_testing
 
 }

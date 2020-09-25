@@ -4,7 +4,6 @@ import com.hanitacm.data.datasource.cache.model.mapper.MoviesLocalDataModelMappe
 import com.hanitacm.data.datasource.db.MoviesDatabase
 import com.hanitacm.data.repository.DataSource
 import com.hanitacm.data.repository.model.MovieDataModel
-import io.reactivex.Completable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -14,15 +13,13 @@ class MoviesCache @Inject constructor(
 ) : DataSource {
 
     override fun getAllMovies(): Single<List<MovieDataModel>> {
-        return moviesDatabase.movieDao.getAll().map { mapperLocal.mapToDataModel(it) }.toSingle()
+        return moviesDatabase.movieDao.getAll().map {
+            mapperLocal.mapToDataModel(it)
+        }.toSingle()
     }
 
-    fun insertMovies(movies: List<MovieDataModel>): Completable {
-
+    fun insertMovies(movies: List<MovieDataModel>): Single<List<Long>> {
         return moviesDatabase.movieDao.insertAll(mapperLocal.mapToLocalDataModel(movies))
     }
 
-    fun isCached(): Single<Boolean> {
-        return moviesDatabase.movieDao.getAll().isEmpty
-    }
 }
