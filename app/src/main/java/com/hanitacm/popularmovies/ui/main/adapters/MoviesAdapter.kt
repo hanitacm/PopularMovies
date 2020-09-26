@@ -4,10 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
+import coil.transform.CircleCropTransformation
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
 import com.hanitacm.popularmovies.ui.model.Movie
@@ -59,10 +61,16 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val photo: ImageView = itemView.photo
+        private val title: TextView = itemView.title
+        private val rate: TextView = itemView.rate
 
 
         fun bind(mediaItem: MovieDomainModel) {
             photo.load("https://image.tmdb.org/t/p/w185${mediaItem.posterPath}")
+            title.text = mediaItem.title
+            rate.text = mediaItem.voteAverage.toString()
+
+
         }
     }
 
