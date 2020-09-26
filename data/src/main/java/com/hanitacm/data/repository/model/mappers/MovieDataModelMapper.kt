@@ -23,4 +23,23 @@ class MovieDataModelMapper @Inject constructor() {
         }
     }
 
+    fun mapToDomainModel(movie: MovieDataModel): MovieDomainModel {
+        return with(movie) {
+            MovieDomainModel(
+                id = id,
+                title = title,
+                overview = overview,
+                releaseDate = releaseDate,
+                posterPath = posterPath,
+                backdropPath = backdropPath,
+                originalLanguage = originalLanguage,
+                originalTitle = originalTitle,
+                popularity = popularity,
+                voteAverage = voteAverage
+            )
+        }
+    }
 }
+
+
+

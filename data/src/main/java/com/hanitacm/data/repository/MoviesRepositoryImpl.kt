@@ -24,6 +24,10 @@ class MoviesRepositoryImpl @Inject constructor(
                 }
             }.map { mapper.mapToDomainModel(it) }
     }
+
+    override fun getMovieDetail(id: Int): Single<MovieDomainModel> {
+        return moviesCache.getMovieDetail(id).map { mapper.mapToDomainModel(it) }
+    }
 }
 
 

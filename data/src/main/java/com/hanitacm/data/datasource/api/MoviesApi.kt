@@ -14,4 +14,8 @@ class MoviesApi @Inject constructor(
         return moviesService.getPopularMovies("4b2dda035db530ab9de5426133354f16")
             .map { mapper.mapToDataModel(it) }
     }
+
+    override fun getMovieDetail(id: Int): Single<MovieDataModel> {
+        return Single.error(UnsupportedOperationException())
+    }
 }

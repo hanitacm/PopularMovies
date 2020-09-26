@@ -18,6 +18,10 @@ class MoviesCache @Inject constructor(
         }.toSingle()
     }
 
+    override fun getMovieDetail(id: Int): Single<MovieDataModel> {
+        TODO("Not yet implemented")
+    }
+
     fun insertMovies(movies: List<MovieDataModel>) {
         return moviesDatabase.movieDao.insertAll(mapperLocal.mapToLocalDataModel(movies))
 

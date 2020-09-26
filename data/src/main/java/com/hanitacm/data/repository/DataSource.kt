@@ -5,4 +5,5 @@ import io.reactivex.Single
 
 interface DataSource {
     fun getAllMovies(): Single<List<MovieDataModel>>
+    fun getMovieDetail(id: Int): Single<MovieDataModel>
 }
