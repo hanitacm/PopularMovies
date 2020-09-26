@@ -2,6 +2,7 @@ package com.hanitacm.popularmovies.ui.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
@@ -26,11 +27,16 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        setToolBar()
         setupRecyclerView()
         subscribeObservers()
 
         viewModel.getPopularMovies()
+    }
+
+    private fun setToolBar() {
+        toolbar.title = getString(R.string.app_name)
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
     }
 
     private fun setupRecyclerView() {
