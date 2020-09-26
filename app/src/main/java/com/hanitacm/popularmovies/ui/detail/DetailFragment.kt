@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
+import coil.api.load
+import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
-import com.hanitacm.popularmovies.ui.model.Movie
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.detail_fragment.*
+import kotlinx.android.synthetic.main.detail_fragment.progressBar
+import kotlinx.android.synthetic.main.main_fragment.*
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.detail_fragment) {
@@ -20,11 +23,39 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movie: Movie = arguments?.get("movie") as Movie
+        viewModel.viewState.observe(viewLifecycleOwner, {
+            when (it) {
+                is DetailViewModelState.Loading -> showProgressBar()
+                is DetailViewModelState.DetailLoaded -> loadMovieDetail(it.movie)
+                is DetailViewModelState.DetailLoadFailure -> showError(it.error)
+            }
+        })
+        val movieId: Int = arguments?.get("movie") as Int
 
 
-        viewModel.getMovieDetail(movie.id)
-        //movieOverview.text = movie.overview
-        //movieTitle.text = movie.title
+        viewModel.getMovieDetail(movieId)
+
     }
+
+    private fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    private fun loadMovieDetail(movie: MovieDomainModel) {
+        progressBar.visibility = View.GONE
+
+        with(movie) {
+            movieOverview.text = overview
+            movieTitle.text = title
+            date.text = releaseDate
+            rating.text = voteAverage.toString()
+            backdrop.load("https://image.tmdb.org/t/p/w780$backdropPath")
+        }
+    }
+
+    private fun showError(error: Exception) {
+
+    }
+
+
 }
