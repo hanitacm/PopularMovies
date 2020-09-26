@@ -19,6 +19,7 @@ ext {
     javax_inject_version = "1"
     okhttp_version = "4.8.1"
     retrofit_version = "2.7.2"
+    room_version = "2.2.5"
     rxandroid_version = '2.0.2'
     rxjava_version = "2.1.10"
 
@@ -40,6 +41,9 @@ ext {
             javax_inject               : "javax.inject:javax.inject:${javax_inject_version}",
             kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
             okhhtp_logging             : "com.squareup.okhttp3:logging-interceptor:${okhttp_version}",
+            room                       : "androidx.room:room-runtime:${room_version}",
+            room_compiler              : "androidx.room:room-compiler:${room_version}",
+            room_rxjava2               : "androidx.room:room-rxjava2:${room_version}",
             retrofit                   : "com.squareup.retrofit2:retrofit:${retrofit_version}",
             retrofit_rxJava            : "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}",
             retrofit_gson              : "com.squareup.retrofit2:converter-gson:${retrofit_version}",
@@ -62,11 +66,12 @@ ext {
     ]
 
     testDependencies = [
-            android_core_testing : "androidx.arch.core:core-testing:${core_testing_version}",
-            espresso      : "androidx.test.espresso:espresso-core:${espresso_version}",
-            junit         : "junit:junit:${junit_version}",
-            mockito       : "org.mockito:mockito-inline:${mockito_version}",
-            mockito_kotlin: "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_kotlin_version}"
+            android_core_testing: "androidx.arch.core:core-testing:${core_testing_version}",
+            espresso            : "androidx.test.espresso:espresso-core:${espresso_version}",
+            junit               : "junit:junit:${junit_version}",
+            mockito             : "org.mockito:mockito-inline:${mockito_version}",
+            mockito_kotlin      : "com.nhaarman.mockitokotlin2:mockito-kotlin:${mockito_kotlin_version}",
+            room_testing        : "androidx.room:room-testing:$room_version"
 
 
     ]

@@ -1,11 +1,12 @@
 package com.hanitacm.data
 
-import MoviesRepositoryImpl
 import com.hanitacm.data.datasource.api.MoviesApi
-import com.hanitacm.data.model.MovieData
-import com.hanitacm.data.model.MoviesDataModel
-import com.hanitacm.data.model.mappers.MoviesDataModelMapper
+import com.hanitacm.data.datasource.cache.MoviesCache
+import com.hanitacm.data.repository.MoviesRepositoryImpl
+import com.hanitacm.data.repository.model.MovieDataModel
+import com.hanitacm.data.repository.model.mappers.MovieDataModelMapper
 import com.hanitacm.domain.model.MovieDomainModel
+import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.only
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -23,26 +24,78 @@ class MoviesRepositoryTest {
     @Mock
     lateinit var moviesApi: MoviesApi
 
+    @Mock
+    lateinit var moviesCache: MoviesCache
+
     @Spy
-    lateinit var moviesDataModelMapper: MoviesDataModelMapper
+    lateinit var moviesDataModelMapper: MovieDataModelMapper
 
     @InjectMocks
     lateinit var moviesRepository: MoviesRepositoryImpl
 
 
     @Test
-    fun `get popular movies from api`() {
-        whenever(moviesApi.getMovies()).thenReturn(Single.just(moviesResponse))
+    fun `get popular movies from cache`() {
+        whenever(moviesCache.getAllMovies()).thenReturn(Single.just(moviesDataModel))
 
-        val apiResponse = moviesRepository.getPopularMovies().test()
+        moviesRepository.getPopularMovies()
 
-        apiResponse.assertNoErrors()
+        verify(moviesCache, only()).getAllMovies()
+        verify(moviesApi, never()).getAllMovies()
+        verify(moviesCache, never()).insertMovies(moviesDataModel)
 
-        verify(moviesApi, only()).getMovies()
-        verify(moviesDataModelMapper).mapToDomainModel(moviesResponse)
-
-        apiResponse.assertValue(moviesDomainModel)
     }
+
+    @Test
+    fun `get popular movies from api when cache is empty`() {
+        whenever(moviesCache.getAllMovies()).thenReturn(Single.just(emptyList()))
+        whenever(moviesApi.getAllMovies()).thenReturn(Single.just(moviesDataModel))
+
+        moviesRepository.getPopularMovies().test()
+
+        verify(moviesCache).getAllMovies()
+        verify(moviesApi, only()).getAllMovies()
+
+    }
+
+    @Test
+    fun `insert movies in cache after get them`() {
+        whenever(moviesCache.getAllMovies()).thenReturn(Single.just(emptyList()))
+        whenever(moviesApi.getAllMovies()).thenReturn(Single.just(moviesDataModel))
+
+        moviesRepository.getPopularMovies().test()
+
+        verify(moviesCache).insertMovies(moviesDataModel)
+    }
+
+    @Test
+    fun `map movies result to moviesDataModel`() {
+        whenever(moviesCache.getAllMovies()).thenReturn(Single.just(emptyList()))
+        whenever(moviesApi.getAllMovies()).thenReturn(Single.just(moviesDataModel))
+
+        val moviesResponse = moviesRepository.getPopularMovies().test()
+
+        verify(moviesDataModelMapper).mapToDomainModel(moviesDataModel)
+
+        moviesResponse.assertResult(moviesDomainModel)
+
+    }
+
+
+    private val moviesDataModel = listOf(
+        MovieDataModel(
+            popularity = 2000.0,
+            voteAverage = 0.0,
+            overview = "A professional thief with \$40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
+            posterPath = "/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
+            releaseDate = "2020-09-29",
+            title = "Money Plane",
+            originalTitle = "Money Plane",
+            originalLanguage = "en",
+            backdropPath = "/gYRzgYE3EOnhUkv7pcbAAsVLe5f.jpg",
+            id = 694919
+        )
+    )
 
     private val moviesDomainModel = listOf(
         MovieDomainModel(
@@ -58,32 +111,6 @@ class MoviesRepositoryTest {
             id = 694919
         )
     )
-
-    private val moviesResponse =
-        MoviesDataModel(
-            page = 1,
-            totalPages = 500,
-            totalResults = 10000,
-            results = listOf(
-                MovieData(
-                    popularity = 2000.0,
-                    voteCount = 0,
-                    video = false,
-                    posterPath = "/6CoRTJTmijhBLJTUNoVSUNxZMEI.jpg",
-                    id = 694919,
-                    adult = false,
-                    backdropPath = "/gYRzgYE3EOnhUkv7pcbAAsVLe5f.jpg",
-                    originalLanguage = "en",
-                    originalTitle = "Money Plane",
-                    genreIds = listOf(28),
-                    title = "Money Plane",
-                    voteAverage = 0.0,
-                    overview = "A professional thief with \$40 million in debt and his family's life on the line must commit one final heist - rob a futuristic airborne casino filled with the world's most dangerous criminals.",
-                    releaseDate = "2020-09-29"
-
-                )
-            )
-        )
 
 
 }

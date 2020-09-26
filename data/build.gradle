@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
 
 android {
     def globalConfiguration = rootProject.extensions.getByName("ext")
@@ -23,13 +25,17 @@ dependencies {
 
     implementation project(":domain")
 
+    implementation baseDependencies.javax_inject
+    implementation baseDependencies.room
+    kapt baseDependencies.room_compiler
+    implementation baseDependencies.room_rxjava2
     implementation baseDependencies.retrofit
     implementation baseDependencies.retrofit_gson
     implementation baseDependencies.rxjava
-    implementation baseDependencies.javax_inject
 
     testImplementation testDependencies.junit
     testImplementation testDependencies.mockito
     testImplementation testDependencies.mockito_kotlin
+    testImplementation testDependencies.room_testing
 
 }
