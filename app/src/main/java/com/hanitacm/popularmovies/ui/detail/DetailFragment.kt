@@ -22,7 +22,9 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
 
         val movie: Movie = arguments?.get("movie") as Movie
 
-        movieOverview.text = movie.overview
-        movieTitle.text = movie.title
+
+        viewModel.getMovieDetail(movie.id)
+        //movieOverview.text = movie.overview
+        //movieTitle.text = movie.title
     }
 }
