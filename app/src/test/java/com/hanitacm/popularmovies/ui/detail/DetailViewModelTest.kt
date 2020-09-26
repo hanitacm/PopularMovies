@@ -3,6 +3,7 @@ package com.hanitacm.popularmovies.ui.detail
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
+import com.hanitacm.domain.UseCaseResult
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.domain.usecase.GetMovieDetailUseCase
 import com.hanitacm.popularmovies.RxSchedulerRule
@@ -47,13 +48,15 @@ class DetailViewModelTest {
 
     @Test
     fun `get movie detail from use case`() {
-        val id = 34
+         val id = 34
 
-        whenever(getMovieDetailUseCase.getMovieDetail(id)).thenReturn(Single.just(movie))
+        whenever(getMovieDetailUseCase.getMovieDetail(id)).thenReturn(Single.just(UseCaseResult.Success(movie)))
 
         detailViewModel.getMovieDetail(id)
 
         verify(getMovieDetailUseCase, only()).getMovieDetail(id)
+        verify(observer).onChanged(DetailViewModelState.Loading)
+        verify(observer).onChanged(DetailViewModelState.DetailLoaded(movie))
     }
 
     private val movie =
@@ -69,5 +72,5 @@ class DetailViewModelTest {
             backdropPath = "/gYRzgYE3EOnhUkv7pcbAAsVLe5f.jpg",
             id = 34
         )
-    
+
 }

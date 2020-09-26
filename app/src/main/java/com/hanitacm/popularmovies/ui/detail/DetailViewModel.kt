@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.hanitacm.domain.UseCaseResult
 import com.hanitacm.domain.usecase.GetMovieDetailUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -30,10 +31,20 @@ class DetailViewModel @ViewModelInject constructor(
             getMovieDetailUseCase.getMovieDetail(id)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe()
-        )
+                .subscribe { result ->
+                    when (result) {
+                        is UseCaseResult.Success -> _viewState.postValue(
+                            DetailViewModelState.DetailLoaded(result.data)
+                        )
+                        is UseCaseResult.Error<*> -> _viewState.postValue(
+                            DetailViewModelState.DetailLoadFailure(
+                                result.error
+                            )
+                        )
 
 
+                    }
+                })
     }
 
     private fun loading() {
