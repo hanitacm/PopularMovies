@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import io.reactivex.Maybe
-import io.reactivex.Single
 
 @Dao
 interface MovieDao {
@@ -14,4 +13,7 @@ interface MovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(movies: List<Movie>)
+
+    @Query("SELECT * FROM Movie WHERE id=:id")
+    fun getById(id: Int): Maybe<Movie>
 }

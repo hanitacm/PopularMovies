@@ -19,7 +19,7 @@ class MoviesCache @Inject constructor(
     }
 
     override fun getMovieDetail(id: Int): Single<MovieDataModel> {
-        TODO("Not yet implemented")
+        return moviesDatabase.movieDao.getById(id).map { mapperLocal.mapToDataModel(it) }.toSingle()
     }
 
     fun insertMovies(movies: List<MovieDataModel>) {
