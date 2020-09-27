@@ -11,7 +11,11 @@
         tools:layout="@layout/main_fragment">
         <action
             android:id="@+id/action_firstFragment_to_detailFragment"
-            app:destination="@id/detailFragment" />
+            app:destination="@id/detailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -21,9 +25,6 @@
         <argument
             android:name="movie"
             app:argType="integer" />
-        <!--        <argument-->
-        <!--            android:name="movie"-->
-        <!--            app:argType="com.hanitacm.popularmovies.ui.model.Movie" />-->
-    </fragment>
+            </fragment>
 
 </navigation>
