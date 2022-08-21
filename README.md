@@ -2,7 +2,7 @@
  
 Android application that shows a list of most popular movies and their details
 
-Min API Level 21
+Min API Level 23
 
 
 ## Tech-stack
