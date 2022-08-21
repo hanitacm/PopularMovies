@@ -7,6 +7,7 @@ import com.hanitacm.domain.UseCaseResult
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.domain.usecase.GetPopularMoviesUseCase
 import com.hanitacm.popularmovies.RxSchedulerRule
+import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import io.reactivex.Single
 import org.junit.Before
@@ -54,8 +55,8 @@ class MainViewModelTest {
 
         mainViewModel.getPopularMovies()
 
-        observer.onChanged(MainViewModelState.Loading)
-        observer.onChanged(MainViewModelState.MoviesLoaded(listPopularMovies))
+        verify(observer).onChanged(MainViewModelState.Loading)
+        verify(observer).onChanged(MainViewModelState.MoviesLoaded(listPopularMovies))
 
     }
 
@@ -73,7 +74,7 @@ class MainViewModelTest {
 
         mainViewModel.getPopularMovies()
 
-        observer.onChanged(MainViewModelState.MoviesLoadFailure(error))
+       verify(observer).onChanged(MainViewModelState.MoviesLoadFailure(error))
     }
 
     private val listPopularMovies = listOf(
