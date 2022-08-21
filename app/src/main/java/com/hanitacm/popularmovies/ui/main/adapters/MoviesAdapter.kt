@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
-import coil.api.load
+import coil.load
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
 import com.hanitacm.popularmovies.databinding.MovieCardItemBinding

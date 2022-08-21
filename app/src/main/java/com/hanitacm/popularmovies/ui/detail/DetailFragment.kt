@@ -10,7 +10,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
-import coil.api.load
+import coil.load
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
 import com.hanitacm.popularmovies.databinding.DetailFragmentBinding
@@ -37,7 +37,8 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
                 is DetailViewModelState.DetailLoadFailure -> showError(it.error)
             }
         }
-        val movieId: Int = arguments?.get("movie") as Int
+
+        val movieId: Int = arguments?.getInt("movie")!!
 
 
         viewModel.getMovieDetail(movieId)
