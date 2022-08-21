@@ -3,6 +3,8 @@ package com.hanitacm.popularmovies.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
@@ -10,14 +12,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
+import com.hanitacm.popularmovies.databinding.MainFragmentBinding
 import com.hanitacm.popularmovies.ui.main.adapters.MoviesAdapter
+import com.hanitacm.popularmovies.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.main_fragment.*
+
 
 @AndroidEntryPoint
 class MainFragment : Fragment(R.layout.main_fragment) {
 
-
+    private val binding by viewBinding(MainFragmentBinding::bind) { rvMovies.adapter = null }
     private val viewModel: MainViewModel by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
@@ -35,15 +39,15 @@ class MainFragment : Fragment(R.layout.main_fragment) {
     }
 
     private fun setToolBar() {
-        toolbar.title = getString(R.string.app_name)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        binding.toolbar.title = getString(R.string.app_name)
+        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
     }
 
     private fun setupRecyclerView() {
         viewManager = GridLayoutManager(requireContext(), 2)
         viewAdapter = MoviesAdapter()
-        rv_movies.adapter = viewAdapter
-        rv_movies.layoutManager = viewManager
+        binding.rvMovies.adapter = viewAdapter
+        binding.rvMovies.layoutManager = viewManager
     }
 
     private fun subscribeObservers() {
@@ -61,11 +65,11 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
 
     private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        binding.progressBar.isVisible = true
     }
 
     private fun loadMovies(movies: List<MovieDomainModel>) {
-        progressBar.visibility = View.GONE
+        binding.progressBar.isGone = true
         viewAdapter.items = movies
     }
 

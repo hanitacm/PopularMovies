@@ -1,17 +1,14 @@
 package com.hanitacm.popularmovies.ui.main.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import coil.api.load
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
-import kotlinx.android.synthetic.main.movie_card_item.view.*
+import com.hanitacm.popularmovies.databinding.MovieCardItemBinding
 import kotlin.properties.Delegates
 
 
@@ -20,9 +17,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
     var items: List<MovieDomainModel> by Delegates.observable(emptyList()) { _, _, _ -> notifyDataSetChanged() }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent.context).inflate(R.layout.movie_card_item, parent, false)
-
-        return ViewHolder(v)
+        return ViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -42,19 +37,26 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.ViewHolder>() {
         return items.size
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val photo: ImageView = itemView.photo
-        private val title: TextView = itemView.title
-        private val rate: TextView = itemView.rate
-
-
+    class ViewHolder(private val binding: MovieCardItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(mediaItem: MovieDomainModel) {
-            photo.load("https://image.tmdb.org/t/p/w185${mediaItem.posterPath}")
-            title.text = mediaItem.title
-            rate.text = mediaItem.voteAverage.toString()
+            binding.photo.load("https://image.tmdb.org/t/p/w185${mediaItem.posterPath}")
+            binding.title.text = mediaItem.title
+            binding.rate.text = mediaItem.voteAverage.toString()
 
 
         }
+
+        companion object {
+            fun create(
+                parent: ViewGroup,
+            ): ViewHolder {
+                val binding =
+                    MovieCardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+                return ViewHolder(binding)
+            }
+        }
+
     }
 
 

@@ -6,18 +6,22 @@ import android.text.SpannableStringBuilder
 import android.view.View
 import androidx.core.text.bold
 import androidx.core.text.scale
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.navGraphViewModels
 import coil.api.load
 import com.hanitacm.domain.model.MovieDomainModel
 import com.hanitacm.popularmovies.R
+import com.hanitacm.popularmovies.databinding.DetailFragmentBinding
+import com.hanitacm.popularmovies.viewbinding.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.detail_fragment.*
 import java.util.*
 
 @AndroidEntryPoint
 class DetailFragment : Fragment(R.layout.detail_fragment) {
 
+    private val binding by viewBinding(DetailFragmentBinding::bind)
     private val viewModel: DetailViewModel by navGraphViewModels(R.id.nav_graph) {
         defaultViewModelProviderFactory
     }
@@ -26,13 +30,13 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.viewState.observe(viewLifecycleOwner, {
+        viewModel.viewState.observe(viewLifecycleOwner) {
             when (it) {
                 is DetailViewModelState.Loading -> showProgressBar()
                 is DetailViewModelState.DetailLoaded -> loadMovieDetail(it.movie)
                 is DetailViewModelState.DetailLoadFailure -> showError(it.error)
             }
-        })
+        }
         val movieId: Int = arguments?.get("movie") as Int
 
 
@@ -41,22 +45,23 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
     }
 
     private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+        binding.progressBar.isVisible = true
     }
 
     @SuppressLint("SetTextI18n")
     private fun loadMovieDetail(movie: MovieDomainModel) {
-        progressBar.visibility = View.GONE
+        binding.progressBar.isGone = true
 
-        with(movie) {
-            movieOverview.text = overview
-            movieTitle.text = title
-            country_date.text =
-                "${originalLanguage.toUpperCase(Locale.getDefault())} | $releaseDate"
-            rating.text = voteAverage.toString()
-            backdrop.load("https://image.tmdb.org/t/p/w780$backdropPath")
+
+        with(binding) {
+            movieOverview.text = movie.overview
+            movieTitle.text = movie.title
+            countryDate.text =
+                "${movie.originalLanguage.uppercase(Locale.getDefault())} | ${movie.releaseDate}"
+            rating.text = movie.voteAverage.toString()
+            backdrop.load("https://image.tmdb.org/t/p/w780${movie.backdropPath}")
             val sb = SpannableStringBuilder()
-                .bold { append(voteAverage.toString()) }
+                .bold { append(movie.voteAverage.toString()) }
                 .scale(0.75F) { append("/10") }
 
             rating.text = sb
