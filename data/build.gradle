@@ -26,11 +26,13 @@ dependencies {
     implementation project(":domain")
 
     implementation baseDependencies.javax_inject
+    implementation baseDependencies.moshi
+    kapt baseDependencies.moshi_codegen
     implementation baseDependencies.room
     kapt baseDependencies.room_compiler
     implementation baseDependencies.room_rxjava2
     implementation baseDependencies.retrofit
-    implementation baseDependencies.retrofit_gson
+    implementation baseDependencies.retrofit_moshi
     implementation baseDependencies.rxjava
 
     testImplementation testDependencies.junit

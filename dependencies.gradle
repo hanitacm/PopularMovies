@@ -16,6 +16,7 @@ ext {
 
     coil_version = "0.13.0"
     javax_inject_version = "1"
+    moshi_version="1.13.0"
     okhttp_version = "4.8.1"
     retrofit_version = "2.7.2"
     room_version = '2.4.3'
@@ -43,13 +44,15 @@ ext {
             hilt_android_compiler      : "com.google.dagger:hilt-android-compiler:${hilt_version}",
             javax_inject               : "javax.inject:javax.inject:${javax_inject_version}",
             kotlin_stdlib              : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}",
+            moshi                      : "com.squareup.moshi:moshi:${moshi_version}",
+            moshi_codegen              : "com.squareup.moshi:moshi-kotlin-codegen:${moshi_version}",
             okhhtp_logging             : "com.squareup.okhttp3:logging-interceptor:${okhttp_version}",
             room                       : "androidx.room:room-runtime:${room_version}",
             room_compiler              : "androidx.room:room-compiler:${room_version}",
             room_rxjava2               : "androidx.room:room-rxjava2:${room_version}",
             retrofit                   : "com.squareup.retrofit2:retrofit:${retrofit_version}",
             retrofit_rxJava            : "com.squareup.retrofit2:adapter-rxjava2:${retrofit_version}",
-            retrofit_gson              : "com.squareup.retrofit2:converter-gson:${retrofit_version}",
+            retrofit_moshi             : "com.squareup.retrofit2:converter-moshi:${retrofit_version}",
             rxjava                     : "io.reactivex.rxjava2:rxjava:${rxjava_version}",
             rxandroid                  : "io.reactivex.rxjava2:rxandroid:${rxandroid_version}"
 
