@@ -3,10 +3,12 @@ package com.hanitacm.popularmovies.ui.main
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -45,7 +47,12 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun setupRecyclerView() {
         viewManager = GridLayoutManager(requireContext(), 2)
-        viewAdapter = MoviesAdapter()
+        viewAdapter = MoviesAdapter { movieId ->
+            findNavController().navigate(
+                R.id.action_firstFragment_to_detailFragment,
+                bundleOf("movie" to movieId)
+            )
+        }
         binding.rvMovies.adapter = viewAdapter
         binding.rvMovies.layoutManager = viewManager
     }
@@ -70,7 +77,7 @@ class MainFragment : Fragment(R.layout.main_fragment) {
 
     private fun loadMovies(movies: List<MovieDomainModel>) {
         binding.progressBar.isGone = true
-        viewAdapter.items = movies
+        viewAdapter.submitList(movies)
     }
 
     private fun showError(error: Exception) {
